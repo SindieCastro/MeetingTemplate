@@ -2,50 +2,84 @@
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>One-on-One Meeting Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One-on-One Meeting Template</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-    body {
-        background: #f5f7fa;
-        padding: 30px;
+
+body{
+    background:#f5f7fa;
+    padding:30px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.form-container{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1{
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+h2{
+    color:#2c3e50;
+    margin-top:30px;
+    margin-bottom:20px;
+    border-bottom:2px solid #e9ecef;
+    padding-bottom:8px;
+}
+
+textarea{
+    min-height:150px;
+}
+
+.saved-message{
+    display:none;
+    color:green;
+    margin-top:10px;
+}
+
+.btn-toolbar{
+    gap:10px;
+}
+
+/* PDF Page Break */
+
+.page-break{
+    page-break-before: always;
+    break-before: page;
+}
+
+/* Print Styling */
+
+@media print{
+
+    body{
+        background:white;
+        padding:0;
     }
 
-    .form-container {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    .form-container{
+        box-shadow:none;
+        border:none;
     }
 
-    h1, h2 {
-        color: #2c3e50;
+    .no-print{
+        display:none !important;
     }
 
-    textarea {
-        min-height: 140px;
-    }
+}
 
-    .btn-toolbar {
-        gap: 10px;
-    }
-
-    .saved-message {
-        color: green;
-        font-size: .9rem;
-        display: none;
-    }
-
-    @media print {
-        .no-print {
-            display: none !important;
-        }
-    }
 </style>
 
 </head>
@@ -56,138 +90,272 @@
 
 <div class="form-container" id="meetingForm">
 
-    <h1 class="mb-4">One-on-One Meeting</h1>
+<h1>One-on-One Meeting</h1>
 
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label class="form-label">Meeting Date</label>
-            <input type="date" class="form-control autosave" id="meetingDate">
-        </div>
-    </div>
+<div class="row mb-4">
 
-    <h2 class="mt-4">Planning for Your One-on-One Meeting</h2>
+```
+<div class="col-md-4">
+    <label class="form-label fw-bold">
+        Meeting Date
+    </label>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label class="form-label">Supervisor Name</label>
-            <input type="text" class="form-control autosave" id="supervisor">
-        </div>
+    <input
+        type="date"
+        id="meetingDate"
+        class="form-control autosave">
+</div>
+```
 
-        <div class="col-md-6">
-            <label class="form-label">Staff Name</label>
-            <input type="text" class="form-control autosave" id="staff">
-        </div>
-    </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Objective of the Conversation</label>
-        <textarea class="form-control autosave" id="objective"></textarea>
-    </div>
+<h2>Planning for Your One-on-One Meeting</h2>
 
-    <div class="mb-3">
-        <label class="form-label">Clarify the Situation</label>
-        <textarea class="form-control autosave" id="clarify"></textarea>
-    </div>
+<div class="row mb-3">
 
-    <div class="mb-3">
-        <label class="form-label">Options</label>
-        <textarea class="form-control autosave" id="options"></textarea>
-    </div>
+```
+<div class="col-md-6">
 
-    <h2 class="mt-5">One-on-One Meeting Critique</h2>
+    <label class="form-label fw-bold">
+        Supervisor Name
+    </label>
 
-    <div class="mb-3">
-        <label class="form-label">What Worked?</label>
-        <textarea class="form-control autosave" id="worked"></textarea>
-    </div>
+    <input
+        type="text"
+        id="supervisor"
+        class="form-control autosave">
 
-    <div class="mb-3">
-        <label class="form-label">What Could Be Improved?</label>
-        <textarea class="form-control autosave" id="improved"></textarea>
-    </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Results & Ideas for Next One-on-One Meeting</label>
-        <textarea class="form-control autosave" id="results"></textarea>
-    </div>
+<div class="col-md-6">
+
+    <label class="form-label fw-bold">
+        Staff Name
+    </label>
+
+    <input
+        type="text"
+        id="staff"
+        class="form-control autosave">
+
+</div>
+```
+
+</div>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    Objective of the Conversation
+</label>
+
+<textarea
+    id="objective"
+    class="form-control autosave"
+    placeholder="Identify the issue(s) you would like to address."></textarea>
+```
+
+</div>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    Clarify the Situation
+</label>
+
+<textarea
+    id="clarify"
+    class="form-control autosave"
+    placeholder="Identify issues and concerns as well as agree on facts."></textarea>
+```
+
+</div>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    Options
+</label>
+
+<textarea
+    id="options"
+    class="form-control autosave"
+    placeholder="Seek ideas and share your thoughts."></textarea>
+```
+
+</div>
+
+<!-- PAGE BREAK FOR PDF -->
+
+<div class="page-break"></div>
+
+<h2>One-on-One Meeting Critique</h2>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    What Worked?
+</label>
+
+<textarea
+    id="worked"
+    class="form-control autosave"></textarea>
+```
+
+</div>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    What Could Be Improved?
+</label>
+
+<textarea
+    id="improved"
+    class="form-control autosave"></textarea>
+```
+
+</div>
+
+<div class="mb-3">
+
+```
+<label class="form-label fw-bold">
+    Results & Ideas for Next One-on-One Meeting
+</label>
+
+<textarea
+    id="results"
+    class="form-control autosave"></textarea>
+```
+
+</div>
 
 </div>
 
 <div class="mt-4 no-print">
-    <div class="btn-toolbar">
-        <button class="btn btn-primary" onclick="downloadPDF()">
-            Export PDF
-        </button>
 
-        <button class="btn btn-secondary" onclick="clearForm()">
-            Clear Form
-        </button>
-    </div>
+```
+<div class="btn-toolbar">
 
-    <div id="savedMessage" class="saved-message mt-2">
-        Changes saved automatically.
-    </div>
+    <button
+        class="btn btn-primary"
+        onclick="downloadPDF()">
+        Export PDF
+    </button>
+
+    <button
+        class="btn btn-secondary"
+        onclick="clearForm()">
+        Clear Form
+    </button>
+
+</div>
+
+<div
+    id="savedMessage"
+    class="saved-message">
+    Changes saved automatically.
+</div>
+```
+
 </div>
 
 </div>
 
 <script>
 
-const fields = document.querySelectorAll('.autosave');
+const fields =
+document.querySelectorAll('.autosave');
 
-function saveData() {
+function saveData(){
+
     const data = {};
 
     fields.forEach(field => {
         data[field.id] = field.value;
     });
 
-    localStorage.setItem('oneOnOneMeeting', JSON.stringify(data));
+    localStorage.setItem(
+        'oneOnOneMeeting',
+        JSON.stringify(data)
+    );
 
-    const msg = document.getElementById('savedMessage');
+    const msg =
+        document.getElementById('savedMessage');
+
     msg.style.display = 'block';
 
     setTimeout(() => {
         msg.style.display = 'none';
-    }, 1500);
+    }, 1200);
 }
 
-function loadData() {
+function loadData(){
 
-    const data = JSON.parse(
-        localStorage.getItem('oneOnOneMeeting')
-    );
+    const data =
+        JSON.parse(
+            localStorage.getItem('oneOnOneMeeting')
+        );
 
-    if (!data) return;
+    if(!data) return;
 
     fields.forEach(field => {
-        if (data[field.id]) {
+
+        if(data[field.id]){
             field.value = data[field.id];
         }
+
     });
 }
 
-function clearForm() {
+function clearForm(){
 
-    if (!confirm("Clear all saved data?")) return;
+    if(!confirm(
+        "Clear all saved information?"
+    )){
+        return;
+    }
 
-    localStorage.removeItem('oneOnOneMeeting');
+    localStorage.removeItem(
+        'oneOnOneMeeting'
+    );
 
     fields.forEach(field => {
         field.value = '';
     });
 }
 
-function downloadPDF() {
+function downloadPDF(){
 
     const element =
         document.getElementById('meetingForm');
 
     const options = {
-        margin: .5,
-        filename: 'One-On-One-Meeting.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 2 },
+
+        margin: 0.5,
+
+        filename:
+            'One-On-One-Meeting.pdf',
+
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+
+        html2canvas: {
+            scale: 2
+        },
+
+        pagebreak: {
+            mode: ['css','legacy']
+        },
+
         jsPDF: {
             unit: 'in',
             format: 'letter',
@@ -195,11 +363,17 @@ function downloadPDF() {
         }
     };
 
-    html2pdf().set(options).from(element).save();
+    html2pdf()
+        .set(options)
+        .from(element)
+        .save();
 }
 
 fields.forEach(field => {
-    field.addEventListener('input', saveData);
+    field.addEventListener(
+        'input',
+        saveData
+    );
 });
 
 loadData();
